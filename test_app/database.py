@@ -19,7 +19,7 @@ class DataBase:
         ).med_cab.strains
 
     def read_csv(self):
-        return pd.read_csv('app/cannabis.csv')
+        return pd.read_csv('test_app/lemmatized_strains.csv')
 
     def make_db(self):
         """Creates and populates database in MongoDB"""
@@ -28,8 +28,8 @@ class DataBase:
         for strain in data:
             strain['Effects'] = strain['Effects'].split(',')
             strain['Flavors'] = strain['Flavors'].split(',')
-            strain['Nearest'] = [
-                data[int(idx)]['Name'] for idx in strain['Nearest'].split(',')
+            strain['Cos Sim Strains'] = [
+                data[int(idx)]['Strain'] for idx in strain['Cos Sim Strains'].split(',')
             ]
         db.insert_many(data)
 
